@@ -430,3 +430,23 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(2, line)
     self.assertEqual(23, column)
+
+  def test_meta_column_multiple_args(self):
+    code = textwrap.dedent("""\
+        name is 'B'
+        L is 1, 2, 3
+        print 'Person ' name ' said ' L at random things'""")
+
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    invalid_info = invalid_info[0]
+
+    line = invalid_info.line
+    column = invalid_info.column
+
+    self.assertEqual(3, line)
+    self.assertEqual(43, column)
