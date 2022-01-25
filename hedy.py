@@ -944,7 +944,7 @@ class IsValid(Filter):
         # that has a missing quote. Further analysis is required to pinpoint where the quote should be added.
 
         #TODO, fh jan 2022 maybe we want to take end_column?
-        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
+        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column, arguments=args), meta
 
     def error_invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
